@@ -13,7 +13,9 @@ import type {
 } from "./types";
 import type { Variable } from "./units";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+// On Vercel the API is the same site under /api. Local and Docker keep an explicit origin.
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || (process.env.VERCEL ? "" : "http://localhost:8000");
 
 function errorMessage(body: unknown, fallback: string): string {
   if (!body || typeof body !== "object") return fallback;
